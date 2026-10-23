@@ -8,6 +8,14 @@
   "source": "index.html",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html -- dist-dir ./dist --no-optimize"
+    "build": "parcel build index.html --dist-dir ./dist --no-optimize"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.0",
+    "parcel": "^2.8.0"
+  },
+  "dependencies": {
+    "core-js": "^3.51.0",
+    "fractional": "^1.0.0"
   }
 }
