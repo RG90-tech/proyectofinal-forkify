@@ -1,30 +1,49 @@
 import * as model from './model.js';
 import recipeView from './views/RecipeView.js';
+import searchView from './views/searchView.js';
+import resultsView from './views/ResultsView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 const controlRecipes = async function () {
   try {
-    // 1. Obtener el ID de la URL (hash)
     const id = window.location.hash.slice(1);
-    
-    // 2. Si no hay ID, detenemos la ejecución (evita el error inicial)
     if (!id) return;
 
-    // 3. Mostrar el spinner de carga en la vista
     recipeView.renderSpinner();
 
-    // 4. Cargar la receta en el modelo a través de la API
+    // 1. Cargando la receta
     await model.loadRecipe(id);
 
-    // 5. Renderizar la receta usando la vista
+    // 2. Renderizando la receta
     recipeView.render(model.state.recipe);
-
   } catch (err) {
-    alert(err);
+    recipeView.renderError();
   }
 };
 
-// 6. Manejo dinámico de eventos para la carga inicial y el cambio de hash en los enlaces
-['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
+const controlSearchResults = async function () {
+  try {
+    resultsView.renderSpinner();
+
+    // 1. Obtener la consulta de búsqueda
+    const query = searchView.getQuery();
+    if (!query) return;
+
+    // 2. Cargar los resultados de búsqueda
+    await model.loadSearchResults(query);
+
+    // 3. Renderizar los resultados
+    resultsView.render(model.state.search.results);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
+};
+
+init();
