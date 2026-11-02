@@ -6,9 +6,10 @@
   "author": "Randy Garcia",
   "type": "commonjs",
   "source": "index.html",
-  "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist --no-optimize"
+ "scripts": {
+  "start": "parcel index.html",
+  "build": "npx parcel build index.html --dist-dir ./dist --no-optimize"
+}
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
