@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npx parcel build index.html --dist-dir ./dist --no-optimize"
   publish = "dist"
 
 [build.environment]
