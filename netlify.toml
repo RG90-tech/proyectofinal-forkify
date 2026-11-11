@@ -1,0 +1,6 @@
+[build]
+  command = "npm install -g parcel && parcel build index.html --dist-dir ./dist --no-optimize"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
